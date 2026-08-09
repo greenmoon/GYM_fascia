@@ -23,6 +23,8 @@ let startedAt = 0;
 let previousElapsed = 0;
 let tickHandle = 0;
 let soundStopHandle = 0;
+let beepContext;
+let activeBeeps = [];
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -52,8 +54,23 @@ function updateClock() {
   ui.clock.dateTime = now.toISOString();
 }
 
+function getBeepContext() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return null;
+  if (!beepContext) beepContext = new AudioContextClass();
+  return beepContext;
+}
+
+function stopTripleBeep() {
+  activeBeeps.forEach((oscillator) => {
+    try { oscillator.stop(); } catch (_) { /* Oscillator has already ended. */ }
+  });
+  activeBeeps = [];
+}
+
 function stopSound() {
   window.clearTimeout(soundStopHandle);
+  stopTripleBeep();
   ui.sound.pause();
   ui.sound.currentTime = 0;
   ui.sound.loop = false;
@@ -66,6 +83,33 @@ function playSound(durationMs) {
   const promise = ui.sound.play();
   if (promise) promise.catch(() => {});
   soundStopHandle = window.setTimeout(stopSound, durationMs);
+}
+
+function playTripleBeep() {
+  stopSound();
+  const context = getBeepContext();
+  if (!context || context.state !== "running") return;
+
+  const firstBeepAt = context.currentTime + 0.02;
+  [0, 0.25, 0.5].forEach((offset) => {
+    const startedAt = firstBeepAt + offset;
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(880, startedAt);
+    gain.gain.setValueAtTime(0.0001, startedAt);
+    gain.gain.exponentialRampToValueAtTime(0.14, startedAt + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startedAt + 0.14);
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.onended = () => {
+      activeBeeps = activeBeeps.filter((item) => item !== oscillator);
+    };
+    activeBeeps.push(oscillator);
+    oscillator.start(startedAt);
+    oscillator.stop(startedAt + 0.15);
+  });
 }
 
 function crossedBoundary(before, after, interval) {
@@ -111,7 +155,7 @@ function tick() {
   const crossedLong = crossedBoundary(previousElapsed, elapsed, LONG_STEP_MS);
   const crossedShort = crossedBoundary(previousElapsed, elapsed, SHORT_STEP_MS);
   if (crossedLong) playSound(10000);
-  else if (crossedShort) playSound(3000);
+  else if (crossedShort) playTripleBeep();
 
   previousElapsed = elapsed;
   render(elapsed);
@@ -119,6 +163,8 @@ function tick() {
 
 function unlockAudio() {
   ui.sound.volume = 0.55;
+  const context = getBeepContext();
+  if (context && context.state === "suspended") context.resume().catch(() => {});
   const promise = ui.sound.play();
   if (promise) {
     promise.then(() => {
