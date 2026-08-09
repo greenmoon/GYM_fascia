@@ -56,10 +56,12 @@ function stopSound() {
   window.clearTimeout(soundStopHandle);
   ui.sound.pause();
   ui.sound.currentTime = 0;
+  ui.sound.loop = false;
 }
 
 function playSound(durationMs) {
   stopSound();
+  ui.sound.loop = true;
   ui.sound.currentTime = 0;
   const promise = ui.sound.play();
   if (promise) promise.catch(() => {});

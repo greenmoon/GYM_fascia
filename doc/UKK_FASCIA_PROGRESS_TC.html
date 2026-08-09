@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FASCIA UKK Progress V08 2026.08.09 22:17</title>
+  <title>FASCIA UKK Progress V09 2026.08.09 22:30</title>
 </head>
 <body>
   <header>
     <h1>FASCIA Unknown → Known Progress</h1>
   </header>
   <main>
+    <details>
+      <summary>(009 2026-08-09 22:30) 固定時長聲音循環</summary>
+      <p><strong>Unknown：</strong>1.779 秒的 cricket 音檔如何產生固定 3、10 與 30 秒的提示？</p>
+      <p><strong>Known：</strong>提示開始時啟用 HTML audio <code>loop</code>，計時器結束時暫停、歸零並停用循環，因此 30 秒、5 分鐘及 DONE 事件可分別維持 3、10、30 秒。</p>
+      <p><strong>Evidence：</strong>V06 載入版本化 JavaScript、音檔時長驗證為 1.77898 秒，loop 控制與 stop 邏輯均通過語法及本機瀏覽器無錯誤檢查。</p>
+    </details>
     <details>
       <summary>(008 2026-08-09 22:17) 秒級即時時間列與 JavaScript 快取失效</summary>
       <p><strong>Unknown：</strong>iPhone 直向模式能否完整顯示秒級即時時間，且不被舊 JavaScript 快取影響？</p>
@@ -59,6 +65,6 @@
       <p><strong>Evidence：</strong>已建立最小專案結構，後續以本機瀏覽器與 Git 狀態驗證。</p>
     </details>
   </main>
-  <footer>FASCIA UKK Progress V08 2026.08.09 22:17 · Created by Kevin</footer>
+  <footer>FASCIA UKK Progress V09 2026.08.09 22:30 · Created by Kevin</footer>
 </body>
 </html>
