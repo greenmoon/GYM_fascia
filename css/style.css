@@ -115,7 +115,9 @@ button {
 
 .counter-red strong {
   color: #ff3748;
-  font-size: clamp(8rem, 39vh, 24rem);
+  max-inline-size: 100%;
+  white-space: nowrap;
+  font-size: clamp(7rem, min(39vh, 68vw), 22rem);
 }
 
 .counter-green strong,
