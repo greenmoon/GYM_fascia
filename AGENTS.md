@@ -32,7 +32,7 @@ For every FASCIA-project shell command:
 
 ## Title naming rule
 
-- Use titles in the form `FASCIA Vnn YYYY.MM.DD HH:mm`.
+- Use app titles in the form `FASCIA Vnn YYYY.MM.DD HH:mm.ss`.
 - For a meaningful release, increment `Vnn` by one and refresh the timestamp.
 - Keep the local folder and GitHub repository name identical: `codex_on_FASCIA_project`.
 

@@ -29,7 +29,7 @@ function pad(value) {
 }
 
 function formatClock(date) {
-  return `${date.getFullYear()}.${pad(date.getMonth() + 1)}.${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  return `${date.getFullYear()}.${pad(date.getMonth() + 1)}.${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}.${pad(date.getSeconds())}`;
 }
 
 function formatDuration(milliseconds) {
@@ -96,7 +96,7 @@ function finish() {
   window.clearInterval(tickHandle);
   setPhase("done");
   render(elapsedBeforeRun);
-  playSound(10000);
+  playSound(30000);
 }
 
 function tick() {
