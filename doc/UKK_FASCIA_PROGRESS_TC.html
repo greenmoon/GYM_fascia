@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FASCIA UKK Progress V06 2026.08.09 22:12</title>
+  <title>FASCIA UKK Progress V07 2026.08.09 22:14</title>
 </head>
 <body>
   <header>
     <h1>FASCIA Unknown → Known Progress</h1>
   </header>
   <main>
+    <details>
+      <summary>(007 2026-08-09 22:14) 發布版 CSS 快取失效處理</summary>
+      <p><strong>Unknown：</strong>為何已發布的 68vw 修正仍在已開啟的瀏覽器顯示舊的 75vw 排版？</p>
+      <p><strong>Known：</strong>HTML 的未版本化 CSS URL 可被瀏覽器快取；在樣式 URL 加上 <code>?v=V04</code> 可強制載入本次發布的樣式。</p>
+      <p><strong>Evidence：</strong>已開啟的頁面量測到舊 CSS 的雙位數寬度超出 7.3 px；來源 CSS 已正確為 68vw，下一次發布將以版本化 URL 驗證即時載入。</p>
+    </details>
     <details>
       <summary>(006 2026-08-09 22:12) iPhone 15 Pro 雙位數紅色計數器適配</summary>
       <p><strong>Unknown：</strong>紅色 30 秒計數器顯示雙位數（例如 19）時，能否在 iPhone 15 Pro 直向模式保留距離可讀性且不超出卡片？</p>
@@ -47,6 +53,6 @@
       <p><strong>Evidence：</strong>已建立最小專案結構，後續以本機瀏覽器與 Git 狀態驗證。</p>
     </details>
   </main>
-  <footer>FASCIA UKK Progress V06 2026.08.09 22:12 · Created by Kevin</footer>
+  <footer>FASCIA UKK Progress V07 2026.08.09 22:14 · Created by Kevin</footer>
 </body>
 </html>
