@@ -3,8 +3,7 @@
 const CYCLE_MS = 10 * 60 * 1000;
 const SHORT_STEP_MS = 30 * 1000;
 const LONG_STEP_MS = 5 * 60 * 1000;
-const FIVE_MIN_ALERT_VOLUME = 0.42;
-const DONE_ALERT_VOLUME = 0.55;
+const CRICKET_ALERT_VOLUME = 0.30;
 
 const ui = {
   clock: document.getElementById("current-time"),
@@ -25,8 +24,6 @@ let startedAt = 0;
 let previousElapsed = 0;
 let tickHandle = 0;
 let soundStopHandle = 0;
-let beepContext;
-let activeBeeps = [];
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -56,23 +53,8 @@ function updateClock() {
   ui.clock.dateTime = now.toISOString();
 }
 
-function getBeepContext() {
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) return null;
-  if (!beepContext) beepContext = new AudioContextClass();
-  return beepContext;
-}
-
-function stopTripleBeep() {
-  activeBeeps.forEach((oscillator) => {
-    try { oscillator.stop(); } catch (_) { /* Oscillator has already ended. */ }
-  });
-  activeBeeps = [];
-}
-
 function stopSound() {
   window.clearTimeout(soundStopHandle);
-  stopTripleBeep();
   ui.sound.pause();
   ui.sound.currentTime = 0;
   ui.sound.loop = false;
@@ -80,39 +62,12 @@ function stopSound() {
 
 function playSound(durationMs) {
   stopSound();
-  ui.sound.volume = durationMs >= 30000 ? DONE_ALERT_VOLUME : FIVE_MIN_ALERT_VOLUME;
+  ui.sound.volume = CRICKET_ALERT_VOLUME;
   ui.sound.loop = true;
   ui.sound.currentTime = 0;
   const promise = ui.sound.play();
   if (promise) promise.catch(() => {});
   soundStopHandle = window.setTimeout(stopSound, durationMs);
-}
-
-function playTripleBeep() {
-  stopSound();
-  const context = getBeepContext();
-  if (!context || context.state !== "running") return;
-
-  const firstBeepAt = context.currentTime + 0.02;
-  [0, 0.25, 0.5].forEach((offset) => {
-    const startedAt = firstBeepAt + offset;
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-
-    oscillator.type = "sine";
-    oscillator.frequency.setValueAtTime(880, startedAt);
-    gain.gain.setValueAtTime(0.0001, startedAt);
-    gain.gain.exponentialRampToValueAtTime(0.11, startedAt + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.0001, startedAt + 0.14);
-    oscillator.connect(gain);
-    gain.connect(context.destination);
-    oscillator.onended = () => {
-      activeBeeps = activeBeeps.filter((item) => item !== oscillator);
-    };
-    activeBeeps.push(oscillator);
-    oscillator.start(startedAt);
-    oscillator.stop(startedAt + 0.15);
-  });
 }
 
 function crossedBoundary(before, after, interval) {
@@ -158,16 +113,14 @@ function tick() {
   const crossedLong = crossedBoundary(previousElapsed, elapsed, LONG_STEP_MS);
   const crossedShort = crossedBoundary(previousElapsed, elapsed, SHORT_STEP_MS);
   if (crossedLong) playSound(10000);
-  else if (crossedShort) playTripleBeep();
+  else if (crossedShort) playSound(3000);
 
   previousElapsed = elapsed;
   render(elapsed);
 }
 
 function unlockAudio() {
-  ui.sound.volume = FIVE_MIN_ALERT_VOLUME;
-  const context = getBeepContext();
-  if (context && context.state === "suspended") context.resume().catch(() => {});
+  ui.sound.volume = CRICKET_ALERT_VOLUME;
   const promise = ui.sound.play();
   if (promise) {
     promise.then(() => {

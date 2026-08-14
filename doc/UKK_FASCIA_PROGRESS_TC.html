@@ -3,13 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FASCIA UKK Progress V12 2026.08.14 09:04</title>
+  <title>FASCIA UKK Progress V13 2026.08.14 20:38</title>
 </head>
 <body>
   <header>
     <h1>FASCIA Unknown → Known Progress</h1>
   </header>
   <main>
+    <details>
+      <summary>(013 2026-08-14 20:38) 全部提示改用 30% cricket 音量</summary>
+      <p><strong>Unknown：</strong>30 秒提示是否能與 5 分鐘及 DONE 提示統一使用 cricket 音效，並在不同模式維持相同音量？</p>
+      <p><strong>Known：</strong>30 秒邊界已由原本 150 ms 三連短嗶聲改為 cricket 循環 3 秒；5 分鐘使用 10 秒、DONE 使用 30 秒，三者共用音量 30%（<code>0.30</code>）。</p>
+      <p><strong>Evidence：</strong>V10 的 <code>tick()</code>、<code>finish()</code> 與 <code>playSound()</code> 均走同一 cricket 音檔路徑；本機語法、差異及瀏覽器測試後再發布驗證。</p>
+    </details>
+    <details>
     <details>
       <summary>(012 2026-08-14 09:04) 健身房提示音分級</summary>
       <p><strong>Unknown：</strong>30 秒、5 分鐘及最終 DONE 提示能否使用適合健身房距離聆聽、又不過度刺耳的不同音量？</p>
@@ -83,6 +90,6 @@
       <p><strong>Evidence：</strong>已建立最小專案結構，後續以本機瀏覽器與 Git 狀態驗證。</p>
     </details>
   </main>
-  <footer>FASCIA UKK Progress V12 2026.08.14 09:04 · Created by Kevin</footer>
+  <footer>FASCIA UKK Progress V13 2026.08.14 20:38 · Created by Kevin</footer>
 </body>
 </html>
