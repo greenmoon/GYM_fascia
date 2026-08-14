@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FASCIA UKK Progress V11 2026.08.14 08:56</title>
+  <title>FASCIA UKK Progress V12 2026.08.14 09:04</title>
 </head>
 <body>
   <header>
     <h1>FASCIA Unknown → Known Progress</h1>
   </header>
   <main>
+    <details>
+      <summary>(012 2026-08-14 09:04) 健身房提示音分級</summary>
+      <p><strong>Unknown：</strong>30 秒、5 分鐘及最終 DONE 提示能否使用適合健身房距離聆聽、又不過度刺耳的不同音量？</p>
+      <p><strong>Known：</strong>30 秒提示維持 880 Hz 三連短嗶聲，增益設為 0.11；5 分鐘 cricket 提示固定 10 秒、音量 0.42；最終 DONE cricket 提示固定 30 秒、音量 0.55。</p>
+      <p><strong>Evidence：</strong>V09 的 <code>playSound()</code> 依提示時長選擇音量，Web Audio 三連短嗶聲增益已更新；JavaScript 語法與差異檢查通過，下一步由 iPhone 硬體音量微調。</p>
+    </details>
     <details>
       <summary>(011 2026-08-14 08:56) 綠色秒數與藍色五分鐘計數器</summary>
       <p><strong>Unknown：</strong>綠色計數器是否能顯示 00–29 秒循環，藍色計數器是否能改為不受上限限制的五分鐘進度？</p>
@@ -77,6 +83,6 @@
       <p><strong>Evidence：</strong>已建立最小專案結構，後續以本機瀏覽器與 Git 狀態驗證。</p>
     </details>
   </main>
-  <footer>FASCIA UKK Progress V11 2026.08.14 08:56 · Created by Kevin</footer>
+  <footer>FASCIA UKK Progress V12 2026.08.14 09:04 · Created by Kevin</footer>
 </body>
 </html>

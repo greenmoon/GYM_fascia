@@ -3,6 +3,8 @@
 const CYCLE_MS = 10 * 60 * 1000;
 const SHORT_STEP_MS = 30 * 1000;
 const LONG_STEP_MS = 5 * 60 * 1000;
+const FIVE_MIN_ALERT_VOLUME = 0.42;
+const DONE_ALERT_VOLUME = 0.55;
 
 const ui = {
   clock: document.getElementById("current-time"),
@@ -78,6 +80,7 @@ function stopSound() {
 
 function playSound(durationMs) {
   stopSound();
+  ui.sound.volume = durationMs >= 30000 ? DONE_ALERT_VOLUME : FIVE_MIN_ALERT_VOLUME;
   ui.sound.loop = true;
   ui.sound.currentTime = 0;
   const promise = ui.sound.play();
@@ -99,7 +102,7 @@ function playTripleBeep() {
     oscillator.type = "sine";
     oscillator.frequency.setValueAtTime(880, startedAt);
     gain.gain.setValueAtTime(0.0001, startedAt);
-    gain.gain.exponentialRampToValueAtTime(0.14, startedAt + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.11, startedAt + 0.01);
     gain.gain.exponentialRampToValueAtTime(0.0001, startedAt + 0.14);
     oscillator.connect(gain);
     gain.connect(context.destination);
@@ -162,7 +165,7 @@ function tick() {
 }
 
 function unlockAudio() {
-  ui.sound.volume = 0.55;
+  ui.sound.volume = FIVE_MIN_ALERT_VOLUME;
   const context = getBeepContext();
   if (context && context.state === "suspended") context.resume().catch(() => {});
   const promise = ui.sound.play();
