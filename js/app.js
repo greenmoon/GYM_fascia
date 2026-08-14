@@ -119,8 +119,8 @@ function crossedBoundary(before, after, interval) {
 function render(elapsed = currentElapsed()) {
   const clamped = Math.min(elapsed, totalDuration());
   ui.counter30.textContent = String(Math.floor(clamped / SHORT_STEP_MS));
-  ui.counter5.textContent = String(Math.floor(clamped / LONG_STEP_MS) % 10);
-  ui.counter10.textContent = String(Math.min(2, Math.floor(clamped / CYCLE_MS)));
+  ui.counter5.textContent = pad(Math.floor(clamped / 1000) % 30);
+  ui.counter10.textContent = String(Math.floor(clamped / LONG_STEP_MS));
   ui.remaining.textContent = formatDuration(totalDuration() - clamped);
 }
 

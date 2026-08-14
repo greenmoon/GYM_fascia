@@ -120,13 +120,15 @@ button {
   font-size: clamp(7rem, min(39vh, 68vw), 22rem);
 }
 
-.counter-green strong,
-.counter-blue strong {
-  font-size: clamp(4rem, 16vh, 9rem);
+.counter-green strong {
+  color: #51e277;
+  font-size: clamp(3.25rem, min(14vh, 22vw), 7rem);
 }
 
-.counter-green strong { color: #51e277; }
-.counter-blue strong { color: #3e8fff; }
+.counter-blue strong {
+  color: #3e8fff;
+  font-size: clamp(3.5rem, min(15vh, 24vw), 8rem);
+}
 
 .session {
   display: grid;

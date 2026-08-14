@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FASCIA UKK Progress V10 2026.08.09 23:25</title>
+  <title>FASCIA UKK Progress V11 2026.08.14 08:56</title>
 </head>
 <body>
   <header>
     <h1>FASCIA Unknown → Known Progress</h1>
   </header>
   <main>
+    <details>
+      <summary>(011 2026-08-14 08:56) 綠色秒數與藍色五分鐘計數器</summary>
+      <p><strong>Unknown：</strong>綠色計數器是否能顯示 00–29 秒循環，藍色計數器是否能改為不受上限限制的五分鐘進度？</p>
+      <p><strong>Known：</strong>綠色使用 <code>floor(elapsed / 1000) % 30</code> 並補零為 00–29；藍色使用 <code>floor(elapsed / 300000)</code>，每 5 分鐘增加且可顯示 0…N。</p>
+      <p><strong>Evidence：</strong>本機 START 測試顯示綠色 00→01、藍色 0 且無 console error；邊界驗證顯示 29 秒為 29、30 秒重設 00、5 分鐘藍色為 1、20 分鐘藍色為 4。</p>
+    </details>
     <details>
       <summary>(010 2026-08-09 23:25) 30 秒三連短嗶聲</summary>
       <p><strong>Unknown：</strong>30 秒提示能否從帶有停頓的 cricket 循環改為清楚的三連短嗶聲？</p>
@@ -71,6 +77,6 @@
       <p><strong>Evidence：</strong>已建立最小專案結構，後續以本機瀏覽器與 Git 狀態驗證。</p>
     </details>
   </main>
-  <footer>FASCIA UKK Progress V10 2026.08.09 23:25 · Created by Kevin</footer>
+  <footer>FASCIA UKK Progress V11 2026.08.14 08:56 · Created by Kevin</footer>
 </body>
 </html>
