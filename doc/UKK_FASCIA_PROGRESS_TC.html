@@ -3,13 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FASCIA UKK Progress V13 2026.08.14 20:38</title>
+  <title>FASCIA UKK Progress V15 2026.09.03 07:39</title>
 </head>
 <body>
   <header>
     <h1>FASCIA Unknown → Known Progress</h1>
   </header>
   <main>
+    <details>
+      <summary>(015 2026-09-03 07:39) 30 秒視窗編號與開始提示音</summary>
+      <p><strong>Unknown：</strong>C2 能否以 1–40 表示目前所在的 30 秒視窗，並在開始新療程時提供明確的 cricket 聲音確認？</p>
+      <p><strong>Known：</strong>C2 從 START 起顯示 1，逐窗遞增至 40，20:00 完成時維持 40 並進入 DONE；START 與 START AGAIN 播放 3 秒 cricket，RESUME 不播放開始提示，DONE 仍使用最高優先的 30 秒 cricket。</p>
+      <p><strong>Evidence：</strong>V11 已通過 0、30 秒、19:30 與 20:00 邊界測試；本機瀏覽器確認 START 後為 RUNNING、視窗 1、cricket 正在循環，PAUSE 後音效停止且無 console error。</p>
+    </details>
+    <details>
+      <summary>(014 2026-09-03 07:31) FASCIA 執行呼叫樹確認</summary>
+      <p><strong>Unknown：</strong>目前 FASCIA 計時器從頁面初始化、使用者操作到計時及聲音提示的實際呼叫關係為何？</p>
+      <p><strong>Known：</strong>頁面載入會初始化即時時鐘與 C2；START/PAUSE 及週期分頁事件控制單一計時狀態，執行中的 100 ms tick 依完成、5 分鐘及 30 秒邊界分流，並統一呼叫 cricket 音效控制。</p>
+      <p><strong>Evidence：</strong><code>js/app.js</code> 第 168–189 行定義事件與初始化入口，第 106–120 行定義 tick 邊界優先序，第 56–70 行定義音效播放與停止路徑。</p>
+    </details>
     <details>
       <summary>(013 2026-08-14 20:38) 全部提示改用 30% cricket 音量</summary>
       <p><strong>Unknown：</strong>30 秒提示是否能與 5 分鐘及 DONE 提示統一使用 cricket 音效，並在不同模式維持相同音量？</p>
@@ -90,6 +102,6 @@
       <p><strong>Evidence：</strong>已建立最小專案結構，後續以本機瀏覽器與 Git 狀態驗證。</p>
     </details>
   </main>
-  <footer>FASCIA UKK Progress V13 2026.08.14 20:38 · Created by Kevin</footer>
+  <footer>FASCIA UKK Progress V15 2026.09.03 07:39 · Created by Kevin</footer>
 </body>
 </html>

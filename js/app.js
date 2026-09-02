@@ -76,7 +76,9 @@ function crossedBoundary(before, after, interval) {
 
 function render(elapsed = currentElapsed()) {
   const clamped = Math.min(elapsed, totalDuration());
-  ui.counter30.textContent = String(Math.floor(clamped / SHORT_STEP_MS));
+  const totalWindows = totalDuration() / SHORT_STEP_MS;
+  const currentWindow = Math.min(totalWindows, Math.floor(clamped / SHORT_STEP_MS) + 1);
+  ui.counter30.textContent = String(currentWindow);
   ui.counter5.textContent = pad(Math.floor(clamped / 1000) % 30);
   ui.counter10.textContent = String(Math.floor(clamped / LONG_STEP_MS));
   ui.remaining.textContent = formatDuration(totalDuration() - clamped);
@@ -131,11 +133,13 @@ function unlockAudio() {
 }
 
 function start() {
+  const newSession = phase === "ready" || phase === "done";
   if (phase === "done") {
     elapsedBeforeRun = 0;
     previousElapsed = 0;
   }
-  unlockAudio();
+  if (newSession) playSound(3000);
+  else unlockAudio();
   startedAt = Date.now();
   setPhase("running");
   tickHandle = window.setInterval(tick, 100);
