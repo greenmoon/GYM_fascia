@@ -9,14 +9,14 @@ This file gives Codex project-level guidance. For every user request, the first 
 This repository is the active FASCIA project:
 
 ```text
-/Users/kevinwei/Dropbox/0DownLoad/codex_on_FASCIA_project
+/Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_fascia_project
 ```
 
 For every FASCIA-project shell command:
 
-1. Set `workdir` to `/Users/kevinwei/Dropbox/0DownLoad/codex_on_FASCIA_project` when supported.
+1. Set `workdir` to `/Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_fascia_project` when supported.
 2. Verify the working directory with `pwd` when starting or resuming work.
-3. If a shell ignores its requested `workdir`, explicitly change to the FASCIA path first.
+3. If a shell ignores its requested `workdir`, explicitly change to the GYM fascia path first.
 4. Keep source-code paths relative to the repository after alignment.
 5. Do not read, edit, generate, or test files in other projects unless explicitly requested.
 
@@ -32,14 +32,14 @@ For every FASCIA-project shell command:
 
 ## Title naming rule
 
-- Use app titles in the form `FASCIA Vnn YYYY.MM.DD HH:mm.ss`.
+- Use app titles in the form `GYM fascia Vnn YYYY.MM.DD HH:mm.ss`.
 - For a meaningful release, increment `Vnn` by one and refresh the timestamp.
-- Keep the local folder and GitHub repository name identical: `codex_on_FASCIA_project`.
+- Keep the local folder and GitHub repository name aligned: `GYM_fascia` (local folder `codex_on_GYM_fascia_project`).
 
 ### LI/GI title alignment
 
 1. Read the full title from the actual current local or published `index.html`.
-2. The project name must be `FASCIA`.
+2. The project name must be `GYM fascia`.
 3. The version and timestamp must exactly match the current `index.html` title.
 4. Use `LI> [full current index title] completed` for local previews.
 5. Use `GI> [full current index title] completed` for published global previews.
